@@ -3,11 +3,15 @@ from collections import UserDict
 
 class AddressBook(UserDict):
     def add_record(self, record):
-        self.data[record.name.value] = record
+        self.data[record.name] = record
+
+    def search_by_records(self, value):
+        return value in self.data.values()
 
 
 class Record:
-    def __init__(self, name):
+    def __init__(self, name, phone_number=""):
+        self.phone_number = phone_number
         self.name = name
         self.phones = []
 
@@ -45,3 +49,24 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+ab = AddressBook()
+
+name1 = Name('Bill')
+print(name1)
+phone1 = Phone('123456')
+print(phone1)
+rec = Record(name1, phone1)
+print(rec)
+
+ab.add_record(rec)
+print(ab)
+
+phone2 = Phone('09876')
+rec.edit_phone_number(phone1, phone2)
+print(rec)
+
+name2 = Name("Jill")
+rec2 = Record(name2)
+ab.add_record(rec2)
+print(ab)
